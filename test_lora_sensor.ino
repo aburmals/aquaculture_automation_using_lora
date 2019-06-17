@@ -56,11 +56,11 @@ Serial.begin(115200);
 sendCommand("at+version\r\n");
 delay(5000);
 ////set conn config
-setConnConfig("dev_eui", "373934357A375416");
+setConnConfig("dev_eui", "XXXXXXXXXXXXXXXX"); // Your Device EUI here
 delay(5000);
-setConnConfig("app_eui", "70B3D57ED001D646");
+setConnConfig("app_eui", "XXXXXXXXXXXXXXXX"); // Your Application EUI here
 delay(5000);
-setConnConfig("app_key", "53BB23C04AE2EFFF3F88112F2B43E677");
+setConnConfig("app_key", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"); // Your Application Key here
 delay(5000);
 //join the connection
 sendJoinReq();
@@ -81,9 +81,9 @@ void loop() {
   static unsigned long analogSampleTimepoint = millis();
  static float pHValue, voltage;
  sensors.requestTemperatures(); 
-  Celcius=sensors.getTempCByIndex(0);
-  Fahrenheit=sensors.toFahrenheit(Celcius);
-  Serial.print(" C  ");
+  Celcius=sensors.getTempCByIndex(0);    // To get the Temperature sensor value 
+  Fahrenheit=sensors.toFahrenheit(Celcius);   // Change the 
+  Serial.print(" *C  ");
   Serial.print(Celcius);
   if(Celcius>=27){
      digitalWrite(relay, HIGH);
@@ -105,9 +105,9 @@ void loop() {
    //Serial.print(voltage, 2);
    Serial.print("pH value: ");
    Serial.println(pHValue, 2);
-   //Serial.print(" alkilinity value:");
-   //Serial.println(pow(10,(((pHValue- 4.1333)/1.7177) )));
-   //digitalWrite(LED, digitalRead(LED) ^ 1);
+   Serial.print(" alkilinity value:");
+   Serial.println(pow(10,(((pHValue- 4.1333)/1.7177) )));
+   digitalWrite(LED, digitalRead(LED) ^ 1);
    printTime = millis();
  }
   if(millis()-analogSampleTimepoint > 40U)     //every 40 milliseconds,read the analog value from the ADC
